@@ -13,7 +13,7 @@ export const OPTIONS = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  pages: { signin: "/signin" },
+  pages: { signin: "/auth/signin" },
 };
 
 const handler = NextAuth(OPTIONS);
