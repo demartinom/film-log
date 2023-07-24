@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FilmStock {
+  id          Int       @unique @default(autoincrement())
+  name        String
+  maker       FilmMaker @relation(fields: [filmMakerId], references: [id])
+  filmMakerId Int
+  ISO         Int
+  color       Boolean
+  size        String    @default("35mm")
+}
+
+model FilmMaker {
+  id        Int         @unique @default(autoincrement())
+  name      String      @unique
+  FilmStock FilmStock[]
+}
