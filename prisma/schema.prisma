@@ -11,5 +11,9 @@ datasource db {
 }
 
 model FilmStock {
-  id Int @unique @default(autoincrement())
+  id    Int     @unique @default(autoincrement())
+  name  String  @unique
+  maker String
+  ISO   Int
+  color Boolean
 }
