@@ -10,14 +10,13 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <Provider>
-        <body>
-          <nav className="navbar bg-slate-600">
-            <div className="navbar-start flex-1">
+        <body className="bg-base-200">
+          <nav className="navbar bg-primary text-primary-content">
+            <div className="flex-1 navbar-start">
               <h1>FilmLog</h1>
             </div>
-
-            <div className="navbar-end mr-6">
-              <div className="dropdown dropdown-hover ">
+            <div className="mr-6 navbar-end">
+              <div className="dropdown dropdown-hover">
                 <label>
                   {session ? (
                     <Image
