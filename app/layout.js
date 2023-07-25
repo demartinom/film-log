@@ -8,9 +8,9 @@ import Image from "next/image";
 export default async function RootLayout({ children }) {
   const session = await getServerSession(OPTIONS);
   return (
-    <html lang="en">
+    <html lang="en" className="bg-base-200">
       <Provider>
-        <body className="bg-base-200">
+        <body>
           <nav className="navbar bg-primary text-primary-content">
             <div className="flex-1 navbar-start">
               <h1>FilmLog</h1>
