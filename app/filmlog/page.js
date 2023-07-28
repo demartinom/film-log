@@ -66,7 +66,7 @@ export default async function FilmLog() {
             )}
           </tbody>
         </table>
-            <NewFilm/>
+        <NewFilm filmData={filmData.film} user={session.user.email} />
       </div>
     </div>
   );
