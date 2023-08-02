@@ -18,10 +18,10 @@ export default function NewFilm({ filmData, user }) {
   }));
   return (
     <>
-      <button className="btn" onClick={() => window.my_modal_2.showModal()}>
+      <button className="btn" onClick={() => window.addFilm.showModal()}>
         Add a new roll
       </button>
-      <dialog id="my_modal_2" className="modal">
+      <dialog id="addFilm" className="modal">
         <form method="dialog" className="max-w-full modal-box">
           <div>
             <h3 className="text-lg font-bold">Add a new film stock</h3>
