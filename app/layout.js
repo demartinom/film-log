@@ -16,8 +16,8 @@ export default async function RootLayout({ children }) {
               <h1>FilmLog</h1>
             </div>
             <div className="mr-6 navbar-end">
-              <div className="dropdown dropdown-hover dropdown-end">
-                <label>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0}>
                   {session ? (
                     <Image
                       src={session.user.image}
@@ -36,10 +36,10 @@ export default async function RootLayout({ children }) {
                     ></Image>
                   )}
                 </label>
-                <ul className="dropdown-content dropdown-end text-end">
+                <ul className="p-2 mt-3 rounded-md dropdown-content dropdown-end text-end bg-primary-focus">
                   {session && (
                     <>
-                      <li >{session.user.name}</li>
+                      {/* <li >{session.user.name}</li> */}
                       <li>{session.user.email}</li>
                     </>
                   )}
