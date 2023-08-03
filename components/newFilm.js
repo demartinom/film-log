@@ -1,21 +1,47 @@
 "use client";
 import React, { useState } from "react";
+import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 
+async function handleSubmit(e, film) {
+  e.preventDefault();
+  await fetch("http://localhost:3000/api/addfilmstock", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(film),
+  });
+}
+
 export default function NewFilm({ filmData, user }) {
-  const [newFilm, setNewFilm] = useState({ user: user });
+  const [newFilm, setNewFilm] = useState({ user: user, color: true });
+
   function handleFilmChange(field, value) {
     setNewFilm((prevData) => ({ ...prevData, [field]: value }));
   }
+
   const filmSelectValues = filmData.map((film) => ({
     value: film.name,
     label: film.name,
   }));
+
   const makerSet = new Set(filmData.map((film) => film.maker.name));
   const makerSelectValues = [...makerSet].map((name) => ({
     value: name,
     label: name,
   }));
+
+  const formatOptions = [
+    { value: "35mm", label: "35mm" },
+    { value: "Medium Format", label: "Medium Format" },
+    { value: "Large Format", label: "Large Format" },
+  ];
+
+  function handleSelectChange(option, keyData) {
+    setNewFilm((prevData) => ({ ...prevData, [keyData]: option.value }));
+  }
+
   return (
     <>
       <button className="btn" onClick={() => window.addFilm.showModal()}>
@@ -30,17 +56,35 @@ export default function NewFilm({ filmData, user }) {
                 className="input"
                 placeholder="Film Stock Name"
                 options={filmSelectValues}
+                onChange={(option) => handleSelectChange(option, "filmName")}
+                required
               ></CreatableSelect>
               <CreatableSelect
                 className="input"
                 placeholder="Film Maker"
                 options={makerSelectValues}
+                required
+                onChange={(option) => handleSelectChange(option, "filmMaker")}
               ></CreatableSelect>
               <input
                 type="number"
                 placeholder="ISO"
                 className="input"
                 onChange={(e) => handleFilmChange("ISO", e.target.value)}
+                required
+              />
+              <Select
+                className="input"
+                placeholder="Format"
+                options={formatOptions}
+                required
+                onChange={(option) => handleSelectChange(option, "format")}
+              ></Select>
+              <input
+                type="checkbox"
+                className="checkbox"
+                checked={newFilm.color}
+                onClick={(e) => handleFilmChange("color", !newFilm.color)}
               />
             </div>
             <h3 className="text-lg font-bold">Add a new roll</h3>
@@ -52,6 +96,7 @@ export default function NewFilm({ filmData, user }) {
                 onChange={(e) =>
                   handleFilmChange("dateFinished", `${e.target.value} 00:00:00`)
                 }
+                required
               />
               <input
                 type="date"
@@ -74,8 +119,15 @@ export default function NewFilm({ filmData, user }) {
             <button className="btn">Add</button>
           </div>
           <div className="modal-action">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn">Close</button>
+            {/* Button to close the modal */}
+            <button
+              className="btn"
+              onSubmit={(e) => {
+                handleSubmit(e, newFilm);
+              }}
+            >
+              Close
+            </button>
           </div>
         </form>
         <form method="dialog" className="modal-backdrop">
