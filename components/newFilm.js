@@ -5,7 +5,7 @@ import CreatableSelect from "react-select/creatable";
 
 async function handleSubmit(e, film) {
   e.preventDefault();
-  await fetch("http://localhost:3000/api/addfilmstock", {
+  await fetch("http://localhost:3000/api/newfilmstock", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,19 +14,18 @@ async function handleSubmit(e, film) {
   });
 }
 
-export default function NewFilm({ filmData, user }) {
+export default function NewFilm({ filmData, user, maker }) {
   const [newFilm, setNewFilm] = useState({ user: user, color: true });
 
   function handleFilmChange(field, value) {
     setNewFilm((prevData) => ({ ...prevData, [field]: value }));
   }
-
-  const filmSelectValues = filmData.map((film) => ({
-    value: film.name,
-    label: film.name,
+  const filmSet = new Set(filmData.map((film) => film.name));
+  const filmSelectValues = [...filmSet].map((film) => ({
+    value: film,
+    label: film,
   }));
-
-  const makerSet = new Set(filmData.map((film) => film.maker.name));
+  const makerSet = new Set(maker.map((maker) => maker.name));
   const makerSelectValues = [...makerSet].map((name) => ({
     value: name,
     label: name,
@@ -84,7 +83,7 @@ export default function NewFilm({ filmData, user }) {
                 type="checkbox"
                 className="checkbox"
                 checked={newFilm.color}
-                onClick={(e) => handleFilmChange("color", !newFilm.color)}
+                onChange={(e) => handleFilmChange("color", !newFilm.color)}
               />
             </div>
             <h3 className="text-lg font-bold">Add a new roll</h3>
@@ -94,7 +93,7 @@ export default function NewFilm({ filmData, user }) {
                 placeholder="Date Started"
                 className="input"
                 onChange={(e) =>
-                  handleFilmChange("dateFinished", `${e.target.value} 00:00:00`)
+                  handleFilmChange("dateStarted", `${e.target.value} 00:00:00`)
                 }
                 required
               />
@@ -104,7 +103,7 @@ export default function NewFilm({ filmData, user }) {
                 className="input"
                 onChange={(e) =>
                   handleFilmChange(
-                    "dateStarted",
+                    "dateFinished",
                     `${e.target.value ? `${e.target.value} 00:00:00` : null}`
                   )
                 }
@@ -116,18 +115,18 @@ export default function NewFilm({ filmData, user }) {
                 onChange={(e) => handleFilmChange("comments", e.target.value)}
               />
             </div>
-            <button className="btn">Add</button>
-          </div>
-          <div className="modal-action">
-            {/* Button to close the modal */}
             <button
               className="btn"
-              onSubmit={(e) => {
+              onClick={(e) => {
                 handleSubmit(e, newFilm);
               }}
             >
-              Close
+              Add
             </button>
+          </div>
+          <div className="modal-action">
+            {/* Button to close the modal */}
+            <button className="btn">Close</button>
           </div>
         </form>
         <form method="dialog" className="modal-backdrop">
