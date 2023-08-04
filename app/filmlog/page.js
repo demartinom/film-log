@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { OPTIONS } from "../api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
 import NewFilm from "@/components/newFilm";
+import Link from "next/link";
 
 const prisma = new PrismaClient();
 
@@ -19,7 +20,8 @@ async function getFilm(user) {
         maker: true,
       },
     });
-    return { rollCount: rollData, film: filmData };
+    const makerData = await prisma.filmMaker.findMany();
+    return { rollCount: rollData, film: filmData, maker: makerData };
   } finally {
     await prisma.$disconnect();
   }
@@ -60,13 +62,21 @@ export default async function FilmLog() {
                     </td>
                     <td>{film.maker.name}</td>
                     <td>{film.ISO}</td>
-                    <td>See your rolls</td>
+                    <td>
+                      <Link href={`/filmlog/myfilm/${film.id}`}>
+                        See your rolls
+                      </Link>
+                    </td>
                   </tr>
                 )
             )}
           </tbody>
         </table>
-            <NewFilm/>
+        <NewFilm
+          filmData={filmData.film}
+          user={session.user.email}
+          maker={filmData.maker}
+        />
       </div>
     </div>
   );

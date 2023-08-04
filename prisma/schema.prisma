@@ -17,8 +17,10 @@ model FilmStock {
   filmMakerId Int
   ISO         Int
   color       Boolean
-  size        String    @default("35mm")
+  format      String    @default("35mm")
   Roll        Roll[]
+
+  @@unique([name, ISO, format])
 }
 
 model FilmMaker {
