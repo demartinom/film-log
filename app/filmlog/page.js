@@ -19,7 +19,8 @@ async function getFilm(user) {
         maker: true,
       },
     });
-    return { rollCount: rollData, film: filmData };
+    const makerData = await prisma.filmMaker.findMany();
+    return { rollCount: rollData, film: filmData, maker: makerData };
   } finally {
     await prisma.$disconnect();
   }
@@ -66,7 +67,11 @@ export default async function FilmLog() {
             )}
           </tbody>
         </table>
-        <NewFilm filmData={filmData.film} user={session.user.email} />
+        <NewFilm
+          filmData={filmData.film}
+          user={session.user.email}
+          maker={filmData.maker}
+        />
       </div>
     </div>
   );
