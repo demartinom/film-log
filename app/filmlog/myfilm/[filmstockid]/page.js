@@ -33,7 +33,7 @@ export default async function FilmStock({ params: { filmstockid } }) {
       <h1 className="text-center">
         {data[0].maker.name} {data[0].film.name}
       </h1>
-      <NewRoll />
+      <NewRoll user={session.user.email} filmID={filmstockid} />
       <table className="table">
         <thead>
           <tr>
