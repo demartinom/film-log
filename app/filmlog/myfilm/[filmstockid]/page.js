@@ -2,6 +2,7 @@ import React from "react";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
+import NewRoll from "@/components/newRoll";
 
 const prisma = new PrismaClient();
 
@@ -29,9 +30,10 @@ export default async function FilmStock({ params: { filmstockid } }) {
 
   return (
     <div>
-      <h1>
+      <h1 className="text-center">
         {data[0].maker.name} {data[0].film.name}
       </h1>
+      <NewRoll />
       <table className="table">
         <thead>
           <tr>
