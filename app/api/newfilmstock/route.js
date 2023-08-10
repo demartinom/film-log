@@ -43,7 +43,9 @@ export async function POST(request) {
           },
         },
         dateStarted: new Date(req.dateStarted).toISOString(),
-        dateFinished: req.dateafinished ?? null,
+        dateFinished: req.dateFinished
+          ? new Date(req.dateFinished).toISOString()
+          : null,
         comments: req.comments ?? null,
         user: req.user,
       },
