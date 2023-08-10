@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 async function handleSubmit(e, film) {
   e.preventDefault();
-  await fetch("http://localhost:3000/api/newfilmsroll", {
+  await fetch("http://localhost:3000/api/newfilmroll", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,8 +12,8 @@ async function handleSubmit(e, film) {
   });
 }
 
-export default function NewRoll({ user }) {
-  const [newRoll, setNewRoll] = useState({ user: user });
+export default function NewRoll({ user, filmID }) {
+  const [newRoll, setNewRoll] = useState({ user: user, filmStockID: filmID });
 
   function handleRollChange(field, value) {
     setNewRoll((prevData) => ({ ...prevData, [field]: value }));
