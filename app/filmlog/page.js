@@ -5,7 +5,7 @@ import { OPTIONS } from "../api/auth/[...nextauth]/route";
 import { PrismaClient } from "@prisma/client";
 import NewFilm from "@/components/newFilm";
 import Link from "next/link";
-
+import { FaArrowRightLong } from "react-icons/fa6";
 const prisma = new PrismaClient();
 
 async function getFilm(user) {
@@ -63,8 +63,11 @@ export default async function FilmLog() {
                     <td>{film.maker.name}</td>
                     <td>{film.ISO}</td>
                     <td>
-                      <Link href={`/filmlog/myfilm/${film.id}`}>
-                        See your rolls
+                      <Link
+                        href={`/filmlog/myfilm/${film.id}`}
+                        className="flex items-center gap-1"
+                      >
+                        See your rolls {<FaArrowRightLong />}
                       </Link>
                     </td>
                   </tr>
