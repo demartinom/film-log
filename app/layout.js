@@ -4,6 +4,8 @@ import LoginButton from "@/components/loginButton";
 import { getServerSession } from "next-auth";
 import { OPTIONS } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
+import { FaAngleDown } from "react-icons/fa6";
+import Link from "next/link";
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(OPTIONS);
@@ -11,11 +13,18 @@ export default async function RootLayout({ children }) {
     <html lang="en" className="bg-base-100">
       <Provider>
         <body>
-          <nav className="navbar bg-primary text-primary-content">
-            <div className="flex-1 navbar-start">
-              <h1>FilmLog</h1>
+          <nav className="navbar bg-info text-info-content">
+            <div className="navbar-start">
+              <Link href="/">
+                <h1 className="text-2xl">FilmLog</h1>
+              </Link>
             </div>
-            <div className="mr-6 navbar-end">
+            <div className="navbar-center">
+              <Link href="/filmlog">
+                <h1 className="text-lg">See My Film Log</h1>
+              </Link>
+            </div>
+            <div className="navbar-end">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0}>
                   {session ? (
@@ -35,8 +44,12 @@ export default async function RootLayout({ children }) {
                       className="rounded-full"
                     ></Image>
                   )}
+                  <div className="flex items-center justify-center mr-5">
+                    <p>{session ? "Me" : "Log In"}</p>
+                    <FaAngleDown />
+                  </div>
                 </label>
-                <ul className="p-2 mt-3 rounded-md dropdown-content dropdown-end text-end bg-primary-focus">
+                <ul className="p-2 mt-3 rounded-md dropdown-content dropdown-end text-end bg-info">
                   {session && (
                     <>
                       {/* <li >{session.user.name}</li> */}
