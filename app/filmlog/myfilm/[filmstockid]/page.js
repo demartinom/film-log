@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 import NewRoll from "@/components/newRoll";
+import DeleteButton from "@/components/deleteButton";
+import EditButton from "@/components/editButton";
 
 const prisma = new PrismaClient();
 
@@ -34,13 +36,14 @@ export default async function FilmStock({ params: { filmstockid } }) {
         {data[0].maker.name} {data[0].film.name}
       </h1>
       <NewRoll user={session.user.email} filmID={filmstockid} />
-      <table className="table">
+      <table className="table max-w-screen-lg">
         <thead>
           <tr>
             <th>Roll #</th>
             <th>Date Started</th>
             <th>Date Finished</th>
             <th>Comments</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -55,6 +58,10 @@ export default async function FilmStock({ params: { filmstockid } }) {
                   : "In Progress"}
               </td>
               <td>{roll.comments}</td>
+              <td className="flex gap-1">
+                <EditButton />
+                <DeleteButton />
+              </td>
             </tr>
           ))}
         </tbody>
