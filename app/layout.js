@@ -19,12 +19,14 @@ export default async function RootLayout({ children }) {
                 <h1 className="text-2xl">FilmLog</h1>
               </Link>
             </div>
-            <div className="navbar-center">
-              <Link href="/filmlog">
-                <h1 className="text-lg">See My Film Log</h1>
-              </Link>
-            </div>
-            <div className="navbar-end">
+            {session && (
+              <div className="navbar-center">
+                <Link href="/filmlog">
+                  <h1 className="text-lg">See My Film Log</h1>
+                </Link>
+              </div>
+            )}
+            <div className="mr-3 navbar-end">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0}>
                   {session ? (
@@ -44,7 +46,7 @@ export default async function RootLayout({ children }) {
                       className="rounded-full"
                     ></Image>
                   )}
-                  <div className="flex items-center justify-center mr-5">
+                  <div className="flex items-center justify-center ">
                     <p>{session ? "Me" : "Log In"}</p>
                     <FaAngleDown />
                   </div>
@@ -56,7 +58,7 @@ export default async function RootLayout({ children }) {
                       <li>{session.user.email}</li>
                     </>
                   )}
-                  <li>
+                  <li className="min-w-max">
                     <LoginButton />
                   </li>
                 </ul>
