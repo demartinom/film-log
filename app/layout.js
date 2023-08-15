@@ -6,6 +6,8 @@ import { OPTIONS } from "./api/auth/[...nextauth]/route";
 import Image from "next/image";
 import { FaAngleDown } from "react-icons/fa6";
 import Link from "next/link";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(OPTIONS);
@@ -21,9 +23,11 @@ export default async function RootLayout({ children }) {
             </div>
             {session && (
               <div className="navbar-center">
-                <Link href="/filmlog">
-                  <h1 className="text-lg">See My Film Log</h1>
-                </Link>
+                <Suspense fallback={<Loading />}>
+                  <Link href="/filmlog">
+                    <h1 className="text-lg">See My Film Log</h1>
+                  </Link>
+                </Suspense>
               </div>
             )}
             <div className="mr-3 navbar-end">
