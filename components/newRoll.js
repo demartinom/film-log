@@ -35,7 +35,6 @@ export default function NewRoll({ user, filmID }) {
             ✕
           </button>
           <div>
-            <h3 className="text-lg font-bold">Add a new film stock</h3>
             <h3 className="text-lg font-bold">Add a new roll</h3>
             <div className="flex gap-2">
               <input
@@ -65,19 +64,16 @@ export default function NewRoll({ user, filmID }) {
                 onChange={(e) => handleRollChange("comments", e.target.value)}
               />
             </div>
-            <button
-              className="btn"
-              onClick={(e) => {
-                handleSubmit(e, newRoll, router);
-              }}
-            >
-              Add
-            </button>
           </div>
-          <div className="modal-action">
-            {/* Button to close the modal */}
-            <button className="btn">Close</button>
-          </div>
+          <div className="modal-action">{/* Button to close the modal */}</div>
+          <button
+            className="btn"
+            onClick={(e) => {
+              handleSubmit(e, newRoll, router);
+            }}
+          >
+            Add Roll
+          </button>
         </form>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
