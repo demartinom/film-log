@@ -5,7 +5,7 @@ import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 import NewRoll from "@/components/newRoll";
 import DeleteButton from "@/components/deleteButton";
 import EditButton from "@/components/editButton";
-
+//TODO: Add grayed out information for film stock and maker name
 const prisma = new PrismaClient();
 
 async function getFilm(session, filmID) {
@@ -36,7 +36,7 @@ export default async function FilmStock({ params: { filmstockid } }) {
         {data[0].maker.name} {data[0].film.name}
       </h1>
       <NewRoll user={session.user.email} filmID={filmstockid} />
-      <table className="table max-w-screen-lg">
+      <table className="relative table max-w-screen-lg">
         <thead>
           <tr>
             <th>Roll #</th>
