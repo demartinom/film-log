@@ -58,9 +58,9 @@ export default async function FilmStock({ params: { filmstockid } }) {
                   : "In Progress"}
               </td>
               <td>{roll.comments}</td>
-              <td className="flex gap-1">
-                <EditButton />
-                <DeleteButton />
+              <td className="flex items-center gap-1">
+                <EditButton rollData={roll} />
+                <DeleteButton rollID={roll.id} />
               </td>
             </tr>
           ))}
