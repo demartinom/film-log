@@ -19,8 +19,8 @@ export default function DeleteButton({ rollID }) {
       setAlertState(true);
       setTimeout(() => {
         setAlertState(false);
-      }, 3000);
-      router.refresh();
+        router.refresh();
+      }, 2000);
     }
   }
   const [alertState, setAlertState] = useState(false);
@@ -50,7 +50,7 @@ export default function DeleteButton({ rollID }) {
         </div>
       )}
       <button>
-        <FaDeleteLeft onClick={() => deleteRoll(rollID)} oncli />
+        <FaDeleteLeft onClick={() => deleteRoll(rollID)} />
       </button>
     </>
   );
