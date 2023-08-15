@@ -18,7 +18,7 @@ export default function NewRoll({ user, filmID }) {
   function handleRollChange(field, value) {
     setNewRoll((prevData) => ({ ...prevData, [field]: value }));
   }
-  //TODO:Refactor with newFilm form
+  //TODO: Refactor with newFilm and/or edit form
   return (
     <>
       <button className="btn" onClick={() => window.addFilm.showModal()}>
