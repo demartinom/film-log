@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
-async function handleSubmit(e, film) {
+async function handleSubmit(e, film, router) {
   e.preventDefault();
   await fetch("http://localhost:3000/api/newfilmroll", {
     method: "POST",
@@ -10,9 +11,12 @@ async function handleSubmit(e, film) {
     },
     body: JSON.stringify(film),
   });
+  router.refresh();
 }
 
 export default function NewRoll({ user, filmID }) {
+  const router = useRouter();
+
   const [newRoll, setNewRoll] = useState({ user: user, filmStockID: filmID });
 
   function handleRollChange(field, value) {
@@ -60,7 +64,7 @@ export default function NewRoll({ user, filmID }) {
             <button
               className="btn"
               onClick={(e) => {
-                handleSubmit(e, newRoll);
+                handleSubmit(e, newRoll, router);
               }}
             >
               Add
