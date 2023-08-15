@@ -31,6 +31,9 @@ export default function NewRoll({ user, filmID }) {
       </button>
       <dialog id="addFilm" className="modal">
         <form method="dialog" className="max-w-full modal-box">
+          <button className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">
+            ✕
+          </button>
           <div>
             <h3 className="text-lg font-bold">Add a new film stock</h3>
             <h3 className="text-lg font-bold">Add a new roll</h3>
