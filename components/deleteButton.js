@@ -1,8 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 
 export default function DeleteButton({ rollID }) {
+  const router = useRouter();
   async function deleteRoll(rollID) {
     try {
       setWait(true);
@@ -18,6 +20,7 @@ export default function DeleteButton({ rollID }) {
       setTimeout(() => {
         setAlertState(false);
       }, 3000);
+      router.refresh();
     }
   }
   const [alertState, setAlertState] = useState(false);
