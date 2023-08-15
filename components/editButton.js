@@ -3,14 +3,18 @@ import React from "react";
 import { FaPenToSquare } from "react-icons/fa6";
 
 export default function EditButton({ rollData }) {
+  const editRoll = `editRoll_${rollData.id}`;
   return (
     <div>
-      <FaPenToSquare
-        onClick={() => window.editRoll.showModal()}
-        className="hover:cursor-pointer"
-      />
-      <dialog id="editRoll" className="modal">
-        <form method="dialog" className="max-w-full modal-box">
+      {/* The button to open modal */}
+      <label htmlFor={editRoll}>
+        <FaPenToSquare className="hover:cursor-pointer" />
+      </label>
+
+      {/* Put this part before </body> tag */}
+      <input type="checkbox" id={editRoll} className="modal-toggle" />
+      <div className="modal">
+        <div className="max-w-full modal-box">
           <div>
             <h3 className="text-lg font-bold">Edit Roll</h3>
             <div className="flex gap-2">
@@ -52,13 +56,15 @@ export default function EditButton({ rollData }) {
           </div>
           <div className="modal-action">
             {/* Button to close the modal */}
-            <button className="btn">Close</button>
+            <label htmlFor={editRoll} className="btn">
+              Close
+            </label>
           </div>
-        </form>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
+        </div>
+        <label className="modal-backdrop" htmlFor={editRoll}>
+          Close
+        </label>
+      </div>
     </div>
   );
 }
