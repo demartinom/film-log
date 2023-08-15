@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 async function handleSubmit(e, film, router) {
   e.preventDefault();
+  window.addFilm.close();
   await fetch("http://localhost:3000/api/newfilmroll", {
     method: "POST",
     headers: {
