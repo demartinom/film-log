@@ -2,24 +2,29 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-async function handleSubmit(e, film, router) {
-  e.preventDefault();
-  window.addFilm.close();
-  await fetch("http://localhost:3000/api/newfilmroll", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(film),
-  });
-  router.refresh();
+async function handleSubmit(e, film, router, setLoading) {
+  try {
+    e.preventDefault();
+    setLoading(true);
+    await fetch("http://localhost:3000/api/newfilmroll", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(film),
+    });
+  } finally {
+    window.addFilm.close();
+    setLoading(false);
+    router.refresh();
+  }
 }
 
 export default function NewRoll({ user, filmID }) {
   const router = useRouter();
 
   const [newRoll, setNewRoll] = useState({ user: user, filmStockID: filmID });
-
+  const [loading, setLoading] = useState(false);
   function handleRollChange(field, value) {
     setNewRoll((prevData) => ({ ...prevData, [field]: value }));
   }
@@ -69,10 +74,14 @@ export default function NewRoll({ user, filmID }) {
           <button
             className="btn"
             onClick={(e) => {
-              handleSubmit(e, newRoll, router);
+              handleSubmit(e, newRoll, router, setLoading);
             }}
           >
-            Add Roll
+            {!loading ? (
+              "Add Roll"
+            ) : (
+              <div className=" loading loading-bars loading-md"></div>
+            )}
           </button>
         </form>
         <form method="dialog" className="modal-backdrop">
