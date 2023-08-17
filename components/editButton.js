@@ -4,6 +4,9 @@ import { FaPenToSquare } from "react-icons/fa6";
 
 export default function EditButton({ rollData }) {
   const editRoll = `editRoll_${rollData.id}`;
+  function formatDate(date) {
+    return date.toISOString().substring(0, 10);
+  }
   return (
     <div>
       {/* The button to open modal */}
@@ -22,6 +25,7 @@ export default function EditButton({ rollData }) {
                 type="date"
                 placeholder="Date Started"
                 className="input"
+                value={formatDate(rollData.dateStarted)}
                 onChange={(e) =>
                   handleRollChange("dateStarted", `${e.target.value} 00:00:00`)
                 }
@@ -31,6 +35,11 @@ export default function EditButton({ rollData }) {
                 type="date"
                 placeholder="Date Finished?"
                 className="input"
+                value={
+                  rollData.dateFinished
+                    ? formatDate(rollData.dateFinished)
+                    : null
+                }
                 onChange={(e) =>
                   handleRollChange(
                     "dateFinished",
@@ -42,6 +51,7 @@ export default function EditButton({ rollData }) {
                 type="text"
                 placeholder="Comments?"
                 className="input"
+                value={rollData.comments ?? ""}
                 onChange={(e) => handleRollChange("comments", e.target.value)}
               />
             </div>
