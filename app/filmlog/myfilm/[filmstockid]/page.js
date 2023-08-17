@@ -16,6 +16,7 @@ async function getFilm(session, filmID) {
         filmStockId: filmID,
       },
       include: { film: true, maker: true },
+      orderBy: { id: "asc" },
     });
     return data;
   } finally {
