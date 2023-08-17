@@ -44,6 +44,7 @@ export default async function FilmLog() {
               <th># of Rolls</th>
               <th>Film Maker</th>
               <th>ISO</th>
+              <th>Format</th>
               <th></th>
             </tr>
           </thead>
@@ -62,6 +63,7 @@ export default async function FilmLog() {
                     </td>
                     <td>{film.maker.name}</td>
                     <td>{film.ISO}</td>
+                    <td>{film.format}</td>
                     <td>
                       <Link
                         href={`/filmlog/myfilm/${film.id}`}
