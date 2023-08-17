@@ -1,12 +1,39 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaPenToSquare } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
+
+async function handleSubmit(e, film, router, setChecked, setLoading) {
+  try {
+    e.preventDefault();
+    setLoading(true);
+    await fetch("http://localhost:3000/api/editfilmroll", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(film),
+    });
+  } finally {
+    setChecked(false);
+    setLoading(false);
+    router.refresh();
+  }
+}
 
 export default function EditButton({ rollData }) {
+  const router = useRouter();
   const editRoll = `editRoll_${rollData.id}`;
   function formatDate(date) {
     return date.toISOString().substring(0, 10);
   }
+  const [rollUpdate, setRollUpdate] = useState(rollData);
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  function handleRollChange(field, value) {
+    setRollUpdate((prevData) => ({ ...prevData, [field]: value }));
+  }
+
   return (
     <div>
       {/* The button to open modal */}
@@ -14,8 +41,13 @@ export default function EditButton({ rollData }) {
         <FaPenToSquare className="hover:cursor-pointer" />
       </label>
 
-      {/* Put this part before </body> tag */}
-      <input type="checkbox" id={editRoll} className="modal-toggle" />
+      <input
+        type="checkbox"
+        id={editRoll}
+        className="modal-toggle"
+        checked={checked}
+        onClick={() => setChecked(!checked)}
+      />
       <div className="modal">
         <div className="max-w-full modal-box">
           <div>
@@ -25,7 +57,7 @@ export default function EditButton({ rollData }) {
                 type="date"
                 placeholder="Date Started"
                 className="input"
-                value={formatDate(rollData.dateStarted)}
+                value={formatDate(rollUpdate.dateStarted)}
                 onChange={(e) =>
                   handleRollChange("dateStarted", `${e.target.value} 00:00:00`)
                 }
@@ -37,7 +69,7 @@ export default function EditButton({ rollData }) {
                 className="input"
                 value={
                   rollData.dateFinished
-                    ? formatDate(rollData.dateFinished)
+                    ? formatDate(rollUpdate.dateFinished)
                     : null
                 }
                 onChange={(e) =>
@@ -51,17 +83,21 @@ export default function EditButton({ rollData }) {
                 type="text"
                 placeholder="Comments?"
                 className="input"
-                value={rollData.comments ?? ""}
+                value={rollUpdate.comments ?? ""}
                 onChange={(e) => handleRollChange("comments", e.target.value)}
               />
             </div>
             <button
               className="btn"
               onClick={(e) => {
-                handleSubmit(e, newRoll);
+                handleSubmit(e, rollUpdate, router, setChecked, setLoading);
               }}
             >
-              Edit
+              {!loading ? (
+                "Edit"
+              ) : (
+                <div className=" loading loading-bars loading-md"></div>
+              )}
             </button>
           </div>
           <div className="modal-action">

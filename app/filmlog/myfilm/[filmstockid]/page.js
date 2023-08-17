@@ -5,7 +5,7 @@ import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 import NewRoll from "@/components/newRoll";
 import DeleteButton from "@/components/deleteButton";
 import EditButton from "@/components/editButton";
-//TODO: Add grayed out information for film stock and maker name
+
 const prisma = new PrismaClient();
 
 async function getFilm(session, filmID) {
