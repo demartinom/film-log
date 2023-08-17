@@ -5,6 +5,7 @@ import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 import NewRoll from "@/components/newRoll";
 import DeleteButton from "@/components/deleteButton";
 import EditButton from "@/components/editButton";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -18,7 +19,7 @@ async function getFilm(session, filmID) {
       include: { film: true, maker: true },
       orderBy: { id: "asc" },
     });
-    return data;
+    return data.length == 0 ? redirect("/filmlog") : data;
   } finally {
     await prisma.$disconnect();
   }
