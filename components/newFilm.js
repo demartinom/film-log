@@ -2,20 +2,30 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { useRouter } from "next/navigation";
 
-async function handleSubmit(e, film) {
+async function handleSubmit(e, film, setLoading, router) {
   e.preventDefault();
-  await fetch("http://localhost:3000/api/newfilmstock", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(film),
-  });
+  setLoading(true);
+  try {
+    await fetch("http://localhost:3000/api/newfilmstock", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(film),
+    });
+  } finally {
+    window.addFilm.close();
+    setLoading(false);
+    router.refresh();
+  }
 }
 
 export default function NewFilm({ filmData, user, maker }) {
+  const router = useRouter();
   const [newFilm, setNewFilm] = useState({ user: user, color: true });
+  const [loading, setLoading] = useState(false);
 
   function handleFilmChange(field, value) {
     setNewFilm((prevData) => ({ ...prevData, [field]: value }));
@@ -118,10 +128,14 @@ export default function NewFilm({ filmData, user, maker }) {
             <button
               className="btn"
               onClick={(e) => {
-                handleSubmit(e, newFilm);
+                handleSubmit(e, newFilm, setLoading, router);
               }}
             >
-              Add
+              {!loading ? (
+                "Add"
+              ) : (
+                <div className=" loading loading-bars loading-md"></div>
+              )}
             </button>
           </div>
           <div className="modal-action">
