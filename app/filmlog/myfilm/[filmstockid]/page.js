@@ -6,6 +6,7 @@ import NewRoll from "@/components/newRoll";
 import DeleteButton from "@/components/deleteButton";
 import EditButton from "@/components/editButton";
 import { redirect } from "next/navigation";
+import BackButton from "@/components/backButton";
 
 const prisma = new PrismaClient();
 
@@ -33,8 +34,9 @@ export default async function FilmStock({ params: { filmstockid } }) {
   const data = await getFilm(session, parseInt(filmstockid));
 
   return (
-    <div className="px-5">
-      <h1 className="mb-10 text-3xl text-center">
+    <div className="relative px-5">
+      <BackButton />
+      <h1 className="pt-3 mb-10 text-3xl text-center">
         {data[0].maker.name} {data[0].film.name}
       </h1>
       <table className="table text-center md:table-lg table-xs">
