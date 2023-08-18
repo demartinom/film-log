@@ -1,5 +1,4 @@
 import React from "react";
-import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 import NewRoll from "@/components/newRoll";
@@ -7,8 +6,7 @@ import DeleteButton from "@/components/deleteButton";
 import EditButton from "@/components/editButton";
 import { redirect } from "next/navigation";
 import BackButton from "@/components/backButton";
-
-const prisma = new PrismaClient();
+import prisma from "@/helper-functions/prisma";
 
 async function getFilm(session, filmID) {
   try {
