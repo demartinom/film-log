@@ -33,12 +33,11 @@ export default async function FilmStock({ params: { filmstockid } }) {
   const data = await getFilm(session, parseInt(filmstockid));
 
   return (
-    <div>
-      <h1 className="text-center">
+    <div className="px-5">
+      <h1 className="mb-10 text-3xl text-center">
         {data[0].maker.name} {data[0].film.name}
       </h1>
-      <NewRoll user={session.user.email} filmID={filmstockid} />
-      <table className="relative table max-w-screen-lg">
+      <table className="table text-center md:table-lg table-xs">
         <thead>
           <tr>
             <th>Roll #</th>
@@ -68,6 +67,7 @@ export default async function FilmStock({ params: { filmstockid } }) {
           ))}
         </tbody>
       </table>
+      <NewRoll user={session.user.email} filmID={filmstockid} />
     </div>
   );
 }

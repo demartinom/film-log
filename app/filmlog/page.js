@@ -34,10 +34,10 @@ export default async function FilmLog() {
   }
   const filmData = await getFilm(session.user.email);
   return (
-    <div>
-      <h1>Film Log</h1>
+    <div className="px-5">
+      <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
-        <table className="table w-1/2">
+        <table className="table text-center">
           <thead>
             <tr>
               <th>Film Stock</th>
@@ -77,12 +77,12 @@ export default async function FilmLog() {
             )}
           </tbody>
         </table>
-        <NewFilm
-          filmData={filmData.film}
-          user={session.user.email}
-          maker={filmData.maker}
-        />
       </div>
+      <NewFilm
+        filmData={filmData.film}
+        user={session.user.email}
+        maker={filmData.maker}
+      />
     </div>
   );
 }
