@@ -89,35 +89,47 @@ export default function NewFilm({ filmData, user, maker }) {
                 required
                 onChange={(option) => handleSelectChange(option, "format")}
               ></Select>
-              <input
-                type="checkbox"
-                className="checkbox"
-                checked={newFilm.color}
-                onChange={(e) => handleFilmChange("color", !newFilm.color)}
-              />
+              <div className="flex items-center">
+                <label>Color Film?</label>{" "}
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  checked={newFilm.color}
+                  onChange={(e) => handleFilmChange("color", !newFilm.color)}
+                />
+              </div>
             </div>
             <h3 className="text-lg font-bold">Add a new roll</h3>
-            <div className="flex gap-2">
-              <input
-                type="date"
-                placeholder="Date Started"
-                className="input"
-                onChange={(e) =>
-                  handleFilmChange("dateStarted", `${e.target.value} 00:00:00`)
-                }
-                required
-              />
-              <input
-                type="date"
-                placeholder="Date Finished?"
-                className="input"
-                onChange={(e) =>
-                  handleFilmChange(
-                    "dateFinished",
-                    `${e.target.value ? `${e.target.value} 00:00:00` : null}`
-                  )
-                }
-              />
+            <div className="flex items-center gap-2">
+              <div className="flex flex-col items-center">
+                <label>Date Started</label>
+                <input
+                  type="date"
+                  placeholder="Date Started"
+                  className="input"
+                  onChange={(e) =>
+                    handleFilmChange(
+                      "dateStarted",
+                      `${e.target.value} 00:00:00`
+                    )
+                  }
+                  required
+                />
+              </div>
+              <div className="flex flex-col items-center">
+                <label>Date Finished</label>
+                <input
+                  type="date"
+                  placeholder="Date Finished?"
+                  className="input"
+                  onChange={(e) =>
+                    handleFilmChange(
+                      "dateFinished",
+                      `${e.target.value ? `${e.target.value} 00:00:00` : null}`
+                    )
+                  }
+                />
+              </div>
               <input
                 type="text"
                 placeholder="Comments?"

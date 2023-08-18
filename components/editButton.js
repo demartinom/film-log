@@ -53,39 +53,51 @@ export default function EditButton({ rollData }) {
           <div>
             <h3 className="text-lg font-bold">Edit Roll</h3>
             <div className="flex gap-2">
-              <input
-                type="date"
-                placeholder="Date Started"
-                className="input"
-                value={formatDate(rollUpdate.dateStarted)}
-                onChange={(e) =>
-                  handleRollChange("dateStarted", `${e.target.value} 00:00:00`)
-                }
-                required
-              />
-              <input
-                type="date"
-                placeholder="Date Finished?"
-                className="input"
-                value={
-                  rollData.dateFinished
-                    ? formatDate(rollUpdate.dateFinished)
-                    : null
-                }
-                onChange={(e) =>
-                  handleRollChange(
-                    "dateFinished",
-                    `${e.target.value ? `${e.target.value} 00:00:00` : null}`
-                  )
-                }
-              />
-              <input
-                type="text"
-                placeholder="Comments?"
-                className="input"
-                value={rollUpdate.comments ?? ""}
-                onChange={(e) => handleRollChange("comments", e.target.value)}
-              />
+              <div className="flex flex-col items-center">
+                <label>Date Started</label>
+                <input
+                  type="date"
+                  placeholder="Date Started"
+                  className="input"
+                  value={formatDate(rollUpdate.dateStarted)}
+                  onChange={(e) =>
+                    handleRollChange(
+                      "dateStarted",
+                      `${e.target.value} 00:00:00`
+                    )
+                  }
+                  required
+                />
+              </div>
+              <div className="flex flex-col items-center">
+                <label>Date Finished</label>
+                <input
+                  type="date"
+                  placeholder="Date Finished?"
+                  className="input"
+                  value={
+                    rollData.dateFinished
+                      ? formatDate(rollUpdate.dateFinished)
+                      : null
+                  }
+                  onChange={(e) =>
+                    handleRollChange(
+                      "dateFinished",
+                      `${e.target.value ? `${e.target.value} 00:00:00` : null}`
+                    )
+                  }
+                />
+              </div>
+              <div className="flex flex-col items-center">
+                <label>Comments</label>
+                <input
+                  type="text"
+                  placeholder="Comments?"
+                  className="input"
+                  value={rollUpdate.comments ?? ""}
+                  onChange={(e) => handleRollChange("comments", e.target.value)}
+                />
+              </div>
             </div>
             <button
               className="btn"
