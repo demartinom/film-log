@@ -37,36 +37,38 @@ export default async function FilmStock({ params: { filmstockid } }) {
       <h1 className="pt-3 mb-10 text-3xl text-center">
         {data[0].maker.name} {data[0].film.name}
       </h1>
-      <table className="table text-center md:table-lg table-xs">
-        <thead>
-          <tr>
-            <th>Roll #</th>
-            <th>Date Started</th>
-            <th>Date Finished</th>
-            <th>Comments</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((roll) => (
-            <tr key={roll.id}>
-              <th>{data.indexOf(roll) + 1}</th>
-              <td>{convertDate(roll.dateStarted)}</td>
-              <td>
-                {roll.dateFinished
-                  ? convertDate(roll.dateFinished)
-                  : "In Progress"}
-              </td>
-              <td>{roll.comments}</td>
-              <td className="flex items-center gap-1">
-                <EditButton rollData={roll} />
-                <DeleteButton rollID={roll.id} />
-              </td>
+      <div className="overflow-x-auto">
+        <table className="table text-center md:table-md table-xs">
+          <thead>
+            <tr>
+              <th>Roll #</th>
+              <th>Date Started</th>
+              <th>Date Finished</th>
+              <th>Comments</th>
+              <th></th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((roll) => (
+              <tr key={roll.id}>
+                <th>{data.indexOf(roll) + 1}</th>
+                <td>{convertDate(roll.dateStarted)}</td>
+                <td>
+                  {roll.dateFinished
+                    ? convertDate(roll.dateFinished)
+                    : "In Progress"}
+                </td>
+                <td>{roll.comments}</td>
+                <td className="flex items-center gap-1">
+                  <EditButton rollData={roll} />
+                  <DeleteButton rollID={roll.id} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <NewRoll user={session.user.email} filmID={filmstockid} />
     </div>
   );
