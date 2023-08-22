@@ -7,7 +7,7 @@ async function handleSubmit(e, film, router, setChecked, setLoading) {
   try {
     e.preventDefault();
     setLoading(true);
-    await fetch("http:///api/editfilmroll", {
+    await fetch("/api/editfilmroll", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
