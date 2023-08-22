@@ -8,7 +8,7 @@ export default function DeleteButton({ rollID }) {
   async function deleteRoll(rollID) {
     try {
       setWait(true);
-      await fetch("http://localhost:3000/api/deleteroll", {
+      await fetch("/api/deleteroll", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

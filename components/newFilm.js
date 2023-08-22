@@ -8,7 +8,7 @@ async function handleSubmit(e, film, setLoading, router) {
   e.preventDefault();
   setLoading(true);
   try {
-    await fetch("http://localhost:3000/api/newfilmstock", {
+    await fetch("/api/newfilmstock", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

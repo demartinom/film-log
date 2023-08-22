@@ -19,6 +19,7 @@ export default async function RootLayout({ children }) {
             <div className="navbar-start">
               <Link href="/">
                 <h1 className="text-2xl">FilmLog</h1>
+                <LoginButton />
               </Link>
             </div>
             {session && (
