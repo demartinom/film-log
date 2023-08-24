@@ -8,6 +8,7 @@ import { FaAngleDown } from "react-icons/fa6";
 import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { FaBars } from "react-icons/fa6";
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(OPTIONS);
@@ -19,11 +20,10 @@ export default async function RootLayout({ children }) {
             <div className="navbar-start">
               <Link href="/">
                 <h1 className="text-2xl">FilmLog</h1>
-                <LoginButton />
               </Link>
             </div>
             {session && (
-              <div className="navbar-center">
+              <div className="hidden md:inline-flex navbar-center">
                 <Suspense fallback={<Loading />}>
                   <Link href="/filmlog">
                     <h1 className="text-lg">See My Film Log</h1>
@@ -31,7 +31,7 @@ export default async function RootLayout({ children }) {
                 </Suspense>
               </div>
             )}
-            <div className="mr-3 navbar-end">
+            <div className="hidden mr-3 navbar-end md:inline-flex">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0}>
                   {session ? (
@@ -65,6 +65,57 @@ export default async function RootLayout({ children }) {
                   )}
                   <li className="min-w-max">
                     <LoginButton />
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="navbar-end md:hidden drawer drawer-end">
+              <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+              <div className="drawer-content">
+                <label htmlFor="my-drawer" className="drawer-button">
+                  {<FaBars />}
+                </label>
+              </div>
+              <div className="drawer-side">
+                <label htmlFor="my-drawer" className="drawer-overlay"></label>
+                <ul className="h-full p-4 menu w-80 bg-base-200 text-base-content">
+                  {/* Sidebar content here */}
+                  <li>
+                    <div className="flex flex-col text-xl">
+                      {session ? (
+                        <>
+                          <Image
+                            src={session.user.image}
+                            alt="user image"
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                          ></Image>
+                          <p>{session.user.email}</p>
+                        </>
+                      ) : (
+                        <>
+                          <Image
+                            src="/logged-out.jpg"
+                            alt="logged out"
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                          ></Image>
+                          <p>Please Log In</p>
+                        </>
+                      )}
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-center text-xl">
+                      <LoginButton />
+                    </div>
+                  </li>
+                  <li>
+                    <Link href="/filmlog" className="flex justify-center">
+                      <h1 className="text-xl">See My Film Log</h1>
+                    </Link>
                   </li>
                 </ul>
               </div>

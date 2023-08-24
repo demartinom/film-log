@@ -33,10 +33,10 @@ export default async function FilmLog() {
   }
   const filmData = await getFilm(session.user.email);
   return (
-    <div className="px-5">
+    <div className="px-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
-        <table className="table text-center">
+        <table className="table text-center -z-10 table-xs md:table-md">
           <thead>
             <tr>
               <th>Film Stock</th>
@@ -63,12 +63,20 @@ export default async function FilmLog() {
                     <td>{film.maker.name}</td>
                     <td>{film.ISO}</td>
                     <td>{film.format}</td>
-                    <td>
+                    <td className="hidden md:block">
                       <Link
                         href={`/filmlog/myfilm/${film.id}`}
                         className="flex items-center gap-1"
                       >
                         See your rolls {<FaArrowRightLong />}
+                      </Link>
+                    </td>
+                    <td className=" md:hidden">
+                      <Link
+                        href={`/filmlog/myfilm/${film.id}`}
+                        className="flex items-center gap-1"
+                      >
+                        {<FaArrowRightLong />}
                       </Link>
                     </td>
                   </tr>
