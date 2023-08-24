@@ -54,59 +54,81 @@ export default function NewFilm({ filmData, user, maker }) {
   return (
     <>
       <button className="btn" onClick={() => window.addFilm.showModal()}>
-        Add a New Film Stock
+        New Film Stock
       </button>
       <dialog id="addFilm" className="modal">
         <form method="dialog" className="max-w-full modal-box">
           <div>
             <h3 className="text-lg font-bold">Add a new film stock</h3>
-            <div className="flex">
-              <CreatableSelect
-                className="input"
-                placeholder="Film Stock Name"
-                options={filmSelectValues}
-                onChange={(option) => handleSelectChange(option, "filmName")}
-                required
-              ></CreatableSelect>
-              <CreatableSelect
-                className="input"
-                placeholder="Film Maker"
-                options={makerSelectValues}
-                required
-                onChange={(option) => handleSelectChange(option, "filmMaker")}
-              ></CreatableSelect>
-              <input
-                type="number"
-                placeholder="ISO"
-                className="input"
-                onChange={(e) => handleFilmChange("ISO", e.target.value)}
-                required
-              />
-              <Select
-                className="input"
-                placeholder="Format"
-                options={formatOptions}
-                required
-                onChange={(option) => handleSelectChange(option, "format")}
-              ></Select>
-              <div className="flex items-center">
-                <label>Color Film?</label>{" "}
+            <div className="flex flex-col gap-5 md:flex-row">
+              <div>
+                <label className="label">
+                  <span className="label-text">Film Stock</span>
+                </label>
+                <CreatableSelect
+                  className="p-0 input"
+                  placeholder="Film Stock Name"
+                  options={filmSelectValues}
+                  onChange={(option) => handleSelectChange(option, "filmName")}
+                  required
+                ></CreatableSelect>
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text">Film Maker</span>
+                </label>
+                <CreatableSelect
+                  className="p-0 input"
+                  placeholder="Film Maker"
+                  options={makerSelectValues}
+                  required
+                  onChange={(option) => handleSelectChange(option, "filmMaker")}
+                ></CreatableSelect>
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text">ISO</span>
+                </label>
                 <input
-                  type="checkbox"
-                  className="checkbox"
-                  checked={newFilm.color}
-                  onChange={(e) => handleFilmChange("color", !newFilm.color)}
+                  type="number"
+                  placeholder="ISO"
+                  className="w-24 input input-bordered"
+                  onChange={(e) => handleFilmChange("ISO", e.target.value)}
+                  required
                 />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text">Format</span>
+                </label>
+                <Select
+                  className="p-0 input"
+                  placeholder="Format"
+                  options={formatOptions}
+                  required
+                  onChange={(option) => handleSelectChange(option, "format")}
+                ></Select>
+              </div>
+              <div className="">
+                <label className="flex flex-col items-start gap-3 label">
+                  <span className="label-text">Color Film?</span>
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={newFilm.color}
+                    onChange={(e) => handleFilmChange("color", !newFilm.color)}
+                  />
+                </label>
               </div>
             </div>
             <h3 className="text-lg font-bold">Add a new roll</h3>
-            <div className="flex items-center gap-2">
-              <div className="flex flex-col items-center">
+            <div className="flex flex-col items-start gap-2 md:items-center md:flex-row">
+              <div className="flex flex-col items-start md:items-center">
                 <label>Date Started</label>
                 <input
                   type="date"
                   placeholder="Date Started"
-                  className="input"
+                  className="input input-bordered"
                   onChange={(e) =>
                     handleFilmChange(
                       "dateStarted",
@@ -116,12 +138,12 @@ export default function NewFilm({ filmData, user, maker }) {
                   required
                 />
               </div>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-start md:items-center">
                 <label>Date Finished</label>
                 <input
                   type="date"
                   placeholder="Date Finished?"
-                  className="input"
+                  className="input input-bordered"
                   onChange={(e) =>
                     handleFilmChange(
                       "dateFinished",
@@ -133,7 +155,7 @@ export default function NewFilm({ filmData, user, maker }) {
               <input
                 type="text"
                 placeholder="Comments?"
-                className="input"
+                className="input input-bordered"
                 onChange={(e) => handleFilmChange("comments", e.target.value)}
               />
             </div>
