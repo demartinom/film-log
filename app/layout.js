@@ -69,7 +69,7 @@ export default async function RootLayout({ children }) {
                 </ul>
               </div>
             </div>
-            <div className="navbar-end md:hidden drawer drawer-end">
+            <div className="z-20 navbar-end md:hidden drawer drawer-end">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
                 <label htmlFor="my-drawer" className="drawer-button">
