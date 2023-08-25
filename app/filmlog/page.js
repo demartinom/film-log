@@ -29,7 +29,7 @@ async function getFilm(user) {
 export default async function FilmLog() {
   const session = await getServerSession(OPTIONS);
   if (!session) {
-    redirect("/api/auth/signin");
+    redirect("/");
   }
   const filmData = await getFilm(session.user.email);
   return (
