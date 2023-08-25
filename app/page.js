@@ -27,7 +27,8 @@ export default async function Home() {
             Welcome to Film Log! Here you can keep track of your rolls of film.
           </h2>
           <h3 className="mt-4 text-xl text-center">
-            To get Started, please log in using either GitHub or Gmail
+            To get started, please log in using either your Github or Google
+            accounts.
           </h3>
         </>
       )}
