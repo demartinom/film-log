@@ -33,7 +33,6 @@ export default async function FilmLog() {
     redirect("/");
   }
   const filmData = await getFilm(session.user.email);
-  console.log(filmData.rollCount);
   return (
     <div className="px-5 mt-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
