@@ -60,7 +60,10 @@ export default function NewFilm({ filmData, user, maker }) {
       >
         New Film Stock
       </button>
-      <button className="btn btn-sm" onClick={() => window.addFilm.showModal()}>
+      <button
+        className="btn btn-sm md:hidden"
+        onClick={() => window.addFilm.showModal()}
+      >
         <FaPlus />
       </button>
       <dialog id="addFilm" className="modal">
