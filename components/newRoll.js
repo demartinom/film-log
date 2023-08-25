@@ -32,13 +32,13 @@ export default function NewRoll({ user, filmID }) {
   return (
     <>
       <button
-        className="hidden btn md:inline-flex"
+        className="hidden mt-2 btn md:inline-flex"
         onClick={() => window.addFilm.showModal()}
       >
         Add a New Roll
       </button>
       <button
-        className="btn btn-sm md:hidden"
+        className="mt-2 btn btn-sm md:hidden"
         onClick={() => window.addFilm.showModal()}
       >
         <FaPlus />
