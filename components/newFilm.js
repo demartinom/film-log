@@ -55,13 +55,13 @@ export default function NewFilm({ filmData, user, maker }) {
   return (
     <>
       <button
-        className="hidden btn md:inline-flex"
+        className="hidden mt-2 btn md:inline-flex"
         onClick={() => window.addFilm.showModal()}
       >
         New Film Stock
       </button>
       <button
-        className="btn btn-sm md:hidden"
+        className="mt-2 btn btn-sm md:hidden"
         onClick={() => window.addFilm.showModal()}
       >
         <FaPlus />
@@ -76,7 +76,7 @@ export default function NewFilm({ filmData, user, maker }) {
                   <span className="label-text">Film Stock</span>
                 </label>
                 <CreatableSelect
-                  className="p-0 input"
+                  className="p-0 input w-52"
                   placeholder="Film Stock Name"
                   options={filmSelectValues}
                   onChange={(option) => handleSelectChange(option, "filmName")}
@@ -88,7 +88,7 @@ export default function NewFilm({ filmData, user, maker }) {
                   <span className="label-text">Film Maker</span>
                 </label>
                 <CreatableSelect
-                  className="p-0 input"
+                  className="p-0 input w-44"
                   placeholder="Film Maker"
                   options={makerSelectValues}
                   required
@@ -102,7 +102,7 @@ export default function NewFilm({ filmData, user, maker }) {
                 <input
                   type="number"
                   placeholder="ISO"
-                  className="w-24 input input-bordered"
+                  className="w-24 h-10 input input-bordered"
                   onChange={(e) => handleFilmChange("ISO", e.target.value)}
                   required
                 />
@@ -112,7 +112,7 @@ export default function NewFilm({ filmData, user, maker }) {
                   <span className="label-text">Format</span>
                 </label>
                 <Select
-                  className="p-0 input"
+                  className="p-0 w-44 input"
                   placeholder="Format"
                   options={formatOptions}
                   required
@@ -120,7 +120,7 @@ export default function NewFilm({ filmData, user, maker }) {
                 ></Select>
               </div>
               <div className="">
-                <label className="flex flex-col items-start gap-3 label">
+                <label className="flex flex-col items-start gap-4 label">
                   <span className="label-text">Color Film?</span>
                   <input
                     type="checkbox"
@@ -134,43 +134,60 @@ export default function NewFilm({ filmData, user, maker }) {
             <h3 className="text-lg font-bold">Add a new roll</h3>
             <div className="flex flex-col items-start gap-2 md:items-center md:flex-row">
               <div className="flex flex-col items-start md:items-center">
-                <label>Date Started</label>
+                <div>
+                  <label className="label">
+                    <span className="label-text">Date Started</span>
+                  </label>
+                  <input
+                    type="date"
+                    placeholder="Date Started"
+                    className="input input-bordered"
+                    onChange={(e) =>
+                      handleFilmChange(
+                        "dateStarted",
+                        `${e.target.value} 00:00:00`
+                      )
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col items-start mt-2 md:items-center">
+                <div>
+                  <label htmlFor="" className="label">
+                    <span className="label-text">
+                      Date Finished (if applicable)
+                    </span>
+                  </label>
+                  <input
+                    type="date"
+                    placeholder="Date Finished?"
+                    className="input input-bordered"
+                    onChange={(e) =>
+                      handleFilmChange(
+                        "dateFinished",
+                        `${
+                          e.target.value ? `${e.target.value} 00:00:00` : null
+                        }`
+                      )
+                    }
+                  />
+                </div>
+              </div>
+              <div className="mt-2">
+                <label className="label">
+                  <span className="label-text">Comments</span>
+                </label>
                 <input
-                  type="date"
-                  placeholder="Date Started"
+                  type="text"
+                  placeholder="Comments?"
                   className="input input-bordered"
-                  onChange={(e) =>
-                    handleFilmChange(
-                      "dateStarted",
-                      `${e.target.value} 00:00:00`
-                    )
-                  }
-                  required
+                  onChange={(e) => handleFilmChange("comments", e.target.value)}
                 />
               </div>
-              <div className="flex flex-col items-start md:items-center">
-                <label>Date Finished</label>
-                <input
-                  type="date"
-                  placeholder="Date Finished?"
-                  className="input input-bordered"
-                  onChange={(e) =>
-                    handleFilmChange(
-                      "dateFinished",
-                      `${e.target.value ? `${e.target.value} 00:00:00` : null}`
-                    )
-                  }
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Comments?"
-                className="input input-bordered"
-                onChange={(e) => handleFilmChange("comments", e.target.value)}
-              />
             </div>
             <button
-              className="btn"
+              className="mt-2 btn"
               onClick={(e) => {
                 handleSubmit(e, newFilm, setLoading, router);
               }}
