@@ -32,7 +32,7 @@ export default async function FilmStock({ params: { filmstockid } }) {
   const data = await getFilm(session, parseInt(filmstockid));
 
   return (
-    <div className="relative px-5">
+    <div className="relative px-5 mt-5">
       <BackButton />
       <h1 className="pt-3 mb-10 text-3xl text-center">
         {data[0].maker.name} {data[0].film.name}
