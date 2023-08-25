@@ -36,60 +36,61 @@ export default async function FilmLog() {
     <div className="px-5 mt-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
-        {filmData == null}?
-        <h2 className="text-xl">
-          You currently have no rolls logged! Press the button below to create
-          your first roll.
-        </h2>
-        :
-        <table className="z-0 table text-center table-xs md:table-md">
-          <thead>
-            <tr>
-              <th>Film Stock</th>
-              <th># of Rolls</th>
-              <th>Film Maker</th>
-              <th>ISO</th>
-              <th>Format</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {filmData.film.map(
-              (film) =>
-                film.Roll.length > 0 && (
-                  <tr className="hover" key={film.id}>
-                    <td>{film.name}</td>
-                    <td>
-                      {
-                        film.Roll.filter(
-                          (filmStock) => filmStock.filmStockId == film.id
-                        ).length
-                      }
-                    </td>
-                    <td>{film.maker.name}</td>
-                    <td>{film.ISO}</td>
-                    <td>{film.format}</td>
-                    <td className="z-10 hidden md:block">
-                      <Link
-                        href={`/filmlog/myfilm/${film.id}`}
-                        className="flex items-center gap-1"
-                      >
-                        See your rolls <FaArrowRightLong />
-                      </Link>
-                    </td>
-                    <td className="z-10 md:hidden">
-                      <Link
-                        href={`/filmlog/myfilm/${film.id}`}
-                        className="flex items-center gap-1"
-                      >
-                        <FaArrowRightLong />
-                      </Link>
-                    </td>
-                  </tr>
-                )
-            )}
-          </tbody>
-        </table>
+        {filmData == null ? (
+          <h2 className="text-xl">
+            You currently have no rolls logged! Press the button below to create
+            your first roll.
+          </h2>
+        ) : (
+          <table className="z-0 table text-center table-xs md:table-md">
+            <thead>
+              <tr>
+                <th>Film Stock</th>
+                <th># of Rolls</th>
+                <th>Film Maker</th>
+                <th>ISO</th>
+                <th>Format</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filmData.film.map(
+                (film) =>
+                  film.Roll.length > 0 && (
+                    <tr className="hover" key={film.id}>
+                      <td>{film.name}</td>
+                      <td>
+                        {
+                          film.Roll.filter(
+                            (filmStock) => filmStock.filmStockId == film.id
+                          ).length
+                        }
+                      </td>
+                      <td>{film.maker.name}</td>
+                      <td>{film.ISO}</td>
+                      <td>{film.format}</td>
+                      <td className="z-10 hidden md:block">
+                        <Link
+                          href={`/filmlog/myfilm/${film.id}`}
+                          className="flex items-center gap-1"
+                        >
+                          See your rolls <FaArrowRightLong />
+                        </Link>
+                      </td>
+                      <td className="z-10 md:hidden">
+                        <Link
+                          href={`/filmlog/myfilm/${film.id}`}
+                          className="flex items-center gap-1"
+                        >
+                          <FaArrowRightLong />
+                        </Link>
+                      </td>
+                    </tr>
+                  )
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
       <NewFilm
         filmData={filmData.film}
