@@ -10,14 +10,14 @@ export default function BackButton() {
     <>
       <button
         type="button"
-        className="absolute hidden btn btn-md top-3 md:inline-flex"
+        className="absolute hidden btn btn-md md:inline-flex"
         onClick={() => router.push("/filmlog")}
       >
         Return to Film Log
       </button>
       <button
         type="button"
-        className="absolute btn btn-sm top-3 md:hidden"
+        className="absolute btn btn-sm md:hidden"
         onClick={() => router.push("/filmlog")}
       >
         <FaArrowLeft />
