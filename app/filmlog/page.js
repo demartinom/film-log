@@ -11,6 +11,7 @@ async function getFilm(user) {
   try {
     const rollData = await prisma.roll.groupBy({
       by: ["filmStockId"],
+      where: { user: user },
       _count: { filmStockId: true },
     });
     const filmData = await prisma.filmStock.findMany({
@@ -32,12 +33,13 @@ export default async function FilmLog() {
     redirect("/");
   }
   const filmData = await getFilm(session.user.email);
+  console.log(filmData.rollCount);
   return (
     <div className="px-5 mt-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
-        {filmData.film.length == 0 ? (
-          <h2 className="text-xl">
+        {filmData.rollCount == 0 ? (
+          <h2 className="text-xl text-center">
             You currently have no rolls logged! Press the button below to create
             your first roll.
           </h2>
