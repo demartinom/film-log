@@ -30,7 +30,9 @@ function convertDate(date) {
 export default async function FilmStock({ params: { filmstockid } }) {
   const session = await getServerSession(OPTIONS);
   const data = await getFilm(session, parseInt(filmstockid));
-
+  if (data.length === 0) {
+    redirect("/filmlog");
+  }
   return (
     <div className="relative px-5 mt-5">
       <BackButton />
