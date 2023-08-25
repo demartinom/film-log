@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { useRouter } from "next/navigation";
+import { FaPlus } from "react-icons/fa6";
 
 async function handleSubmit(e, film, setLoading, router) {
   e.preventDefault();
@@ -53,8 +54,14 @@ export default function NewFilm({ filmData, user, maker }) {
 
   return (
     <>
-      <button className="btn" onClick={() => window.addFilm.showModal()}>
+      <button
+        className="hidden btn md:inline-flex"
+        onClick={() => window.addFilm.showModal()}
+      >
         New Film Stock
+      </button>
+      <button className="btn btn-sm" onClick={() => window.addFilm.showModal()}>
+        <FaPlus />
       </button>
       <dialog id="addFilm" className="modal">
         <form method="dialog" className="max-w-full modal-box">

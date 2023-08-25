@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { FaPlus } from "react-icons/fa6";
 async function handleSubmit(e, film, router, setLoading) {
   try {
     e.preventDefault();
@@ -31,8 +31,17 @@ export default function NewRoll({ user, filmID }) {
   //TODO: Refactor with newFilm and/or edit form
   return (
     <>
-      <button className="btn" onClick={() => window.addFilm.showModal()}>
+      <button
+        className="hidden btn md:inline-flex"
+        onClick={() => window.addFilm.showModal()}
+      >
         Add a New Roll
+      </button>
+      <button
+        className="btn btn-sm md:hidden"
+        onClick={() => window.addFilm.showModal()}
+      >
+        <FaPlus />
       </button>
       <dialog id="addFilm" className="modal">
         <form method="dialog" className="max-w-full modal-box">
@@ -41,33 +50,53 @@ export default function NewRoll({ user, filmID }) {
           </button>
           <div>
             <h3 className="text-lg font-bold">Add a new roll</h3>
-            <div className="flex gap-2">
-              <input
-                type="date"
-                placeholder="Date Started"
-                className="input"
-                onChange={(e) =>
-                  handleRollChange("dateStarted", `${e.target.value} 00:00:00`)
-                }
-                required
-              />
-              <input
-                type="date"
-                placeholder="Date Finished?"
-                className="input"
-                onChange={(e) =>
-                  handleRollChange(
-                    "dateFinished",
-                    `${e.target.value ? `${e.target.value} 00:00:00` : null}`
-                  )
-                }
-              />
-              <input
-                type="text"
-                placeholder="Comments?"
-                className="input"
-                onChange={(e) => handleRollChange("comments", e.target.value)}
-              />
+            <div className="flex flex-col gap-2 md:flex-row">
+              <div>
+                <label className="label">
+                  <span className="label-text">Date Started</span>
+                </label>
+                <input
+                  type="date"
+                  placeholder="Date Started"
+                  className="input input-bordered"
+                  onChange={(e) =>
+                    handleRollChange(
+                      "dateStarted",
+                      `${e.target.value} 00:00:00`
+                    )
+                  }
+                  required
+                />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text">
+                    Date Finished (if applicable)
+                  </span>
+                </label>
+                <input
+                  type="date"
+                  placeholder="Date Finished?"
+                  className="input input-bordered"
+                  onChange={(e) =>
+                    handleRollChange(
+                      "dateFinished",
+                      `${e.target.value ? `${e.target.value} 00:00:00` : null}`
+                    )
+                  }
+                />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text">Comments?</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Write comments here"
+                  className="input input-bordered"
+                  onChange={(e) => handleRollChange("comments", e.target.value)}
+                />
+              </div>
             </div>
           </div>
           <div className="modal-action">{/* Button to close the modal */}</div>
