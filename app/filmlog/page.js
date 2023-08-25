@@ -36,7 +36,7 @@ export default async function FilmLog() {
     <div className="px-5 mt-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
-        {filmData.length == 0 ? (
+        {filmData.film.length == 0 ? (
           <h2 className="text-xl">
             You currently have no rolls logged! Press the button below to create
             your first roll.
