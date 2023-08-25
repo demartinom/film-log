@@ -10,6 +10,11 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { FaBars } from "react-icons/fa6";
 
+export const metadata = {
+  title: "Film Log",
+  description: "A website to track your film rolls",
+};
+
 export default async function RootLayout({ children }) {
   const session = await getServerSession(OPTIONS);
   return (
