@@ -36,6 +36,12 @@ export default async function FilmLog() {
     <div className="px-5 mt-5 overflow-x-auto">
       <h1 className="mb-10 text-3xl text-center">{`${session.user.name}'s Film Log`}</h1>
       <div>
+        {filmData == null}?
+        <h2 className="text-xl">
+          You currently have no rolls logged! Press the button below to create
+          your first roll.
+        </h2>
+        :
         <table className="z-0 table text-center table-xs md:table-md">
           <thead>
             <tr>
