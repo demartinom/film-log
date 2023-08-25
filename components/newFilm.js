@@ -131,7 +131,7 @@ export default function NewFilm({ filmData, user, maker }) {
                 </label>
               </div>
             </div>
-            <h3 className="text-lg font-bold">Add a new roll</h3>
+            <h3 className="mt-3 text-lg font-bold">Add a new roll</h3>
             <div className="flex flex-col items-start gap-2 md:items-center md:flex-row">
               <div className="flex flex-col items-start md:items-center">
                 <div>
