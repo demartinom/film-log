@@ -16,7 +16,6 @@
     "next": "13.4.10",
     "next-auth": "^4.22.3",
     "postcss": "8.4.26",
-    "prisma": "^5.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
@@ -25,6 +24,7 @@
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.29.5-appdir.0",
-    "daisyui": "^3.2.1"
+    "daisyui": "^3.2.1",
+    "prisma": "^5.9.1"
   }
 }
